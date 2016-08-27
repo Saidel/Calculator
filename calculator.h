@@ -40,10 +40,6 @@ struct Brackets{
             Result -= Last_Num;
             Last_Num/=d1;
             Result += Last_Num;
-        }else if(Binary_Operation == '^'){
-            Result -= Last_Num;
-            Last_Num=pow(Last_Num, d1);
-            Result += Last_Num;
         }
         Binary_Operation = 0;
     }
@@ -66,7 +62,7 @@ double Get_Number(string n){
 }
 
 bool Is_Special_Char(char c){
-    if(c == '+' || c == '-' || c == '*' || c == '/' || c == '^' || c == '(' || c == ')') return true;
+    if(c == '+' || c == '-' || c == '*' || c == '/' || c == '(' || c == ')') return true;
     else return false;
 }
 
@@ -79,7 +75,7 @@ string Calculate(string exp_s){
         if(exp_s[i] != ' '){
             if(Is_Special_Char(exp_s[i])){
 
-                if(Br[BrLevel].Binary_Operation != 0 && (exp_s[i]=='*' || exp_s[i]=='/' || exp_s[i]=='^'))
+                if(Br[BrLevel].Binary_Operation != 0 && (exp_s[i]=='*' || exp_s[i]=='/'))
                     return "ошибка операции '"+string(1, exp_s[i])+"'";
 
                 if(exp_s[i]=='+' || exp_s[i]=='-'){
@@ -88,7 +84,7 @@ string Calculate(string exp_s){
                         else
                             Br[BrLevel].Unary_Operation = (Br[BrLevel].Unary_Operation == exp_s[i])?'+':'-';
                 }
-                else if(exp_s[i]=='*' || exp_s[i]=='/' || exp_s[i]=='^') Br[BrLevel].Binary_Operation = exp_s[i];
+                else if(exp_s[i]=='*' || exp_s[i]=='/') Br[BrLevel].Binary_Operation = exp_s[i];
                 else if(exp_s[i]=='('){
                     if(Br[BrLevel].Binary_Operation==0) return "пропушена операция перед '('";
                     BrLevel++;
