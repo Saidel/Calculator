@@ -1,4 +1,4 @@
-#ifndef CALCULATOR_H
+п»ї#ifndef CALCULATOR_H
 #define CALCULATOR_H
 
 #include <iostream>
@@ -76,7 +76,7 @@ string Calculate(string exp_s){
             if(Is_Special_Char(exp_s[i])){
 
                 if(Br[BrLevel].Binary_Operation != 0 && (exp_s[i]=='*' || exp_s[i]=='/'))
-                    return "ошибка операции '"+string(1, exp_s[i])+"'";
+                    return "РѕС€РёР±РєР° РѕРїРµСЂР°С†РёРё '"+string(1, exp_s[i])+"'";
 
                 if(exp_s[i]=='+' || exp_s[i]=='-'){
                         if(Br[BrLevel].Binary_Operation == 0)
@@ -86,15 +86,15 @@ string Calculate(string exp_s){
                 }
                 else if(exp_s[i]=='*' || exp_s[i]=='/') Br[BrLevel].Binary_Operation = exp_s[i];
                 else if(exp_s[i]=='('){
-                    if(Br[BrLevel].Binary_Operation==0) return "пропушена операция перед '('";
+                    if(Br[BrLevel].Binary_Operation==0) return "РїСЂРѕРїСѓС€РµРЅР° РѕРїРµСЂР°С†РёСЏ РїРµСЂРµРґ '('";
                     BrLevel++;
                     if(BrLevel < Br.size()) Br[BrLevel].Clear();
                     else Br.push_back(Brackets());
                 }else if(exp_s[i]==')'){
                     BrLevel--;
-                    if(BrLevel < 0) return "неправильная расстановка скобок";
-                    if(Br[BrLevel+1].Result >= 10000000 || Br[BrLevel+1].Result <= -10000000) return "по модулю не меньше 10000000";
-                    if(Br[BrLevel].Binary_Operation == '/' && Br[BrLevel+1].Result == 0) return "ошибка деления на ноль";
+                    if(BrLevel < 0) return "РЅРµРїСЂР°РІРёР»СЊРЅР°СЏ СЂР°СЃСЃС‚Р°РЅРѕРІРєР° СЃРєРѕР±РѕРє";
+                    if(Br[BrLevel+1].Result >= 10000000 || Br[BrLevel+1].Result <= -10000000) return "РїРѕ РјРѕРґСѓР»СЋ РЅРµ РјРµРЅСЊС€Рµ 10000000";
+                    if(Br[BrLevel].Binary_Operation == '/' && Br[BrLevel+1].Result == 0) return "РѕС€РёР±РєР° РґРµР»РµРЅРёСЏ РЅР° РЅРѕР»СЊ";
                     Br[BrLevel].Do_Operation(Br[BrLevel+1].Result);
                 }
 
@@ -103,9 +103,9 @@ string Calculate(string exp_s){
                 while(!Is_Special_Char(exp_s[EndNum]) && exp_s[EndNum]!=' ' && exp_s[EndNum]!='\0') EndNum++;
                 double Num = Get_Number(exp_s.substr(i, EndNum-i));
 
-                if(Num == -1) return "строка содержит недопустимое выражение '"+exp_s.substr(i, EndNum-i)+"'";
-                if(Num >= 10000000 || Num <= -10000000) return "по модулю не меньше 10000000";
-                if(Br[BrLevel].Binary_Operation == '/' && Num == 0) return "ошибка деления на ноль";
+                if(Num == -1) return "СЃС‚СЂРѕРєР° СЃРѕРґРµСЂР¶РёС‚ РЅРµРґРѕРїСѓСЃС‚РёРјРѕРµ РІС‹СЂР°Р¶РµРЅРёРµ '"+exp_s.substr(i, EndNum-i)+"'";
+                if(Num >= 10000000 || Num <= -10000000) return "РїРѕ РјРѕРґСѓР»СЋ РЅРµ РјРµРЅСЊС€Рµ 10000000";
+                if(Br[BrLevel].Binary_Operation == '/' && Num == 0) return "РѕС€РёР±РєР° РґРµР»РµРЅРёСЏ РЅР° РЅРѕР»СЊ";
                 Br[BrLevel].Do_Operation(Num);
 
                 i = EndNum-1;
@@ -113,14 +113,14 @@ string Calculate(string exp_s){
         }
     }
 
-    if(BrLevel != 0) return "не все скобки закрыты";
+    if(BrLevel != 0) return "РЅРµ РІСЃРµ СЃРєРѕР±РєРё Р·Р°РєСЂС‹С‚С‹";
 
     for(int i = 0; i<Br.size(); i++)
         if(Br[i].Binary_Operation != 0)
-                return "ошибка операции '"+string(1, Br[i].Unary_Operation!='+'?Br[i].Unary_Operation:Br[i].Binary_Operation)+"'";
+                return "РѕС€РёР±РєР° РѕРїРµСЂР°С†РёРё '"+string(1, Br[i].Unary_Operation!='+'?Br[i].Unary_Operation:Br[i].Binary_Operation)+"'";
 
 
-    if(Br[0].Result >= 10000000 || Br[0].Result <= -10000000) return "по модулю не меньше 10000000";
+    if(Br[0].Result >= 10000000 || Br[0].Result <= -10000000) return "РїРѕ РјРѕРґСѓР»СЋ РЅРµ РјРµРЅСЊС€Рµ 10000000";
 
     string Res = to_string(roundf(Br[0].Result*100.0)/100.0);
     while(Res.back() == '0') Res.pop_back();

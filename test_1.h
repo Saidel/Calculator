@@ -1,4 +1,4 @@
-#ifndef TEST_1_H
+п»ї#ifndef TEST_1_H
 #define TEST_1_H
 
 #include <iostream>
@@ -97,7 +97,7 @@ BOOST_AUTO_TEST_CASE( test_macro_overview )
         string Calc = Calculate(out);
         out+= " | "+Calc+"|"+R;
 
-        BOOST_TEST((R.compare(Calc) == 0 || Calc == "ошибка деления на ноль" || Calc == "по модулю не меньше 10000000"), "\n"+out);
+        BOOST_TEST((R.compare(Calc) == 0 || Calc == "РѕС€РёР±РєР° РґРµР»РµРЅРёСЏ РЅР° РЅРѕР»СЊ" || Calc == "РїРѕ РјРѕРґСѓР»СЋ РЅРµ РјРµРЅСЊС€Рµ 10000000"), "\n"+out);
     }
 }
 
